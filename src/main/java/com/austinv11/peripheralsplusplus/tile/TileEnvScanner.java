@@ -12,17 +12,17 @@ public class TileEnvScanner extends TilePeripheral {
 
 	@CCMethod
 	public String getBiome() {
-		return worldObj.getBiomeGenForCoords(getPos()).biomeName;
+		return worldObj.getBiomeForCoordsBody(getPos()).getBiomeName();
 	}
 
 	@CCMethod
 	public String getTemperature() {
-		return worldObj.getBiomeGenForCoords(getPos()).getTempCategory().name();
+		return worldObj.getBiomeForCoordsBody(getPos()).getTempCategory().name();
 	}
 
 	@CCMethod
 	public boolean getSnow() {
-		return worldObj.getBiomeGenForCoords(getPos()).getEnableSnow();
+		return worldObj.getBiomeForCoordsBody(getPos()).getEnableSnow();
 	}
 
 	@Override

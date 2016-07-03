@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 public class BlockChatBox extends BlockPPP implements ITileEntityProvider {
 	public BlockChatBox() {
-		super(Material.iron);
+		super(Material.IRON);
 	}
 
 	@Override

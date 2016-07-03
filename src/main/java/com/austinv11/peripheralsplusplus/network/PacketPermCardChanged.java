@@ -40,7 +40,7 @@ public class PacketPermCardChanged implements IMessage {
 	public static class PermCardChangePacketHandler implements IMessageHandler<PacketPermCardChanged, IMessage> {
 		@Override
 		public IMessage onMessage(PacketPermCardChanged message, MessageContext ctx) {
-			ItemStack permCard = ctx.getServerHandler().playerEntity.getCurrentEquippedItem();
+			ItemStack permCard = ctx.getServerHandler().playerEntity.getActiveItemStack();
 			if (permCard != null) {
 				NBTTagCompound permCardTag = permCard.getTagCompound();
 				if (permCardTag != null) {

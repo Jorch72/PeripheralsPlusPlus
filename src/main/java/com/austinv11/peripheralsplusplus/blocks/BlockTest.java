@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 public class BlockTest extends BlockPPP implements ITileEntityProvider {
 	public BlockTest() {
-		super(Material.iron);
+		super(Material.IRON);
 		this.setCreativeTab(null);
 	}
 

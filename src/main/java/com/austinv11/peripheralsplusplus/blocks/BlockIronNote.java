@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 public class BlockIronNote extends BlockPPP implements ITileEntityProvider {
 	public BlockIronNote() {
-		super(Material.iron);
+		super(Material.IRON);
 	}
 
 	@Override

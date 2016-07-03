@@ -7,7 +7,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 
 public class GuiPermCard extends GuiScreen {
 	private ItemStack permCard;
@@ -37,11 +37,11 @@ public class GuiPermCard extends GuiScreen {
 		drawTexturedModalRect(x + 10, y + 40, this.canGetStacks ? 0 : 9, 166, 9, 9);
 		drawTexturedModalRect(x + 10, y + 60, this.canWithdraw ? 0 : 9, 166, 9, 9);
 		drawTexturedModalRect(x + 10, y + 80, this.canDeposit ? 0 : 9, 166, 9, 9);
-		fontRendererObj.drawString(StatCollector.translateToLocal("peripheralsplusplus.inv.permCard"), x + 22, y + 5, 0x313131);
-		fontRendererObj.drawString(StatCollector.translateToLocal("peripheralsplusplus.inv.permCard.perms"), x + 32, y + 20, 0x313131);
-		fontRendererObj.drawString(StatCollector.translateToLocal("peripheralsplusplus.inv.permCard.get"), x + 25, y + 40, 0x313131);
-		fontRendererObj.drawString(StatCollector.translateToLocal("peripheralsplusplus.inv.permCard.withdraw"), x + 25, y + 60, 0x313131);
-		fontRendererObj.drawString(StatCollector.translateToLocal("peripheralsplusplus.inv.permCard.deposit"), x + 25, y + 80, 0x313131);
+		fontRendererObj.drawString(I18n.translateToLocal("peripheralsplusplus.inv.permCard"), x + 22, y + 5, 0x313131);
+		fontRendererObj.drawString(I18n.translateToLocal("peripheralsplusplus.inv.permCard.perms"), x + 32, y + 20, 0x313131);
+		fontRendererObj.drawString(I18n.translateToLocal("peripheralsplusplus.inv.permCard.get"), x + 25, y + 40, 0x313131);
+		fontRendererObj.drawString(I18n.translateToLocal("peripheralsplusplus.inv.permCard.withdraw"), x + 25, y + 60, 0x313131);
+		fontRendererObj.drawString(I18n.translateToLocal("peripheralsplusplus.inv.permCard.deposit"), x + 25, y + 80, 0x313131);
 	}
 
 	@Override

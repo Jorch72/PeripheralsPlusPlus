@@ -7,7 +7,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
-import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 public class ItemPermCard extends ItemPPP {
@@ -22,7 +25,7 @@ public class ItemPermCard extends ItemPPP {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
+	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		if (Config.enablePlayerInterface) {
 			NBTTagCompound compound = itemStackIn.getTagCompound();
 			if (!playerIn.isSneaking()) {
@@ -39,29 +42,29 @@ public class ItemPermCard extends ItemPPP {
 						compound.setBoolean("getStacks", false);
 						compound.setBoolean("withdraw", false);
 						compound.setBoolean("deposit", false);
-						playerIn.addChatComponentMessage(new ChatComponentTranslation("peripheralsplusplus.chat.permCard.set"));
+						playerIn.addChatComponentMessage(new TextComponentTranslation("peripheralsplusplus.chat.permCard.set"));
 						itemStackIn.setTagCompound(compound);
 					} else {
-						playerIn.addChatComponentMessage(new ChatComponentTranslation("peripheralsplusplus.chat.permCard.alreadySet"));
+						playerIn.addChatComponentMessage(new TextComponentTranslation("peripheralsplusplus.chat.permCard.alreadySet"));
 					}
 				}
 			} else {
 				if (compound == null || itemStackIn.getTagCompound().getTag("profile") == null) {
 					if (!worldIn.isRemote) {
-						playerIn.addChatComponentMessage(new ChatComponentTranslation("peripheralsplusplus.chat.permCard.notSet"));
+						playerIn.addChatComponentMessage(new TextComponentTranslation("peripheralsplusplus.chat.permCard.notSet"));
 					}
-					return itemStackIn;
+					return ActionResult.newResult(EnumActionResult.FAIL, itemStackIn);
 				}
 				if (!NBTUtil.readGameProfileFromNBT((NBTTagCompound) itemStackIn.getTagCompound().getTag("profile")).getId().toString().equals(playerIn.getGameProfile().getId().toString())) {
 					if (!worldIn.isRemote) {
-						playerIn.addChatComponentMessage(new ChatComponentTranslation("peripheralsplusplus.chat.permCard.wrongOwner"));
+						playerIn.addChatComponentMessage(new TextComponentTranslation("peripheralsplusplus.chat.permCard.wrongOwner"));
 					}
-					return itemStackIn;
+					return ActionResult.newResult(EnumActionResult.FAIL, itemStackIn);
 				}
 
 				playerIn.openGui(PeripheralsPlusPlus.instance, Reference.GUIs.PERM_CARD.ordinal(), worldIn, (int) playerIn.posX, (int) playerIn.posY, (int) playerIn.posZ);
 			}
 		}
-		return itemStackIn;
+		return ActionResult.newResult(EnumActionResult.SUCCESS, itemStackIn);
 	}
 }

@@ -6,7 +6,8 @@ import com.austinv11.peripheralsplusplus.util.Util;
 import dan200.computercraft.api.lua.LuaException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +27,7 @@ public class TilePlayerSensor extends TilePeripheral {
 		int range = (int) (double) (Double) arguments[0];
 		if (range > Config.playerSensorMaxRange) range = Config.playerSensorMaxRange;
 
-		AxisAlignedBB bb = AxisAlignedBB.fromBounds(pos.getX() - range, pos.getY() - range, pos.getZ() - range, pos.getX() + range, pos.getY() + range, pos.getZ() + range);
+		AxisAlignedBB bb = new AxisAlignedBB(pos.getX() - range, pos.getY() - range, pos.getZ() - range, pos.getX() + range, pos.getY() + range, pos.getZ() + range);
 		List<? extends EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, bb);
 
 		HashMap<String, Integer> playerDists = new HashMap<String, Integer>();
@@ -44,7 +45,7 @@ public class TilePlayerSensor extends TilePeripheral {
 			throw new LuaException("Bad argument #1. Expected boolean.");
 		boolean limit = (Boolean) arguments[0];
 
-		List<? extends EntityPlayer> players = limit ? worldObj.playerEntities : MinecraftServer.getServer().getConfigurationManager().playerEntityList;
+		List<? extends EntityPlayer> players = limit ? worldObj.playerEntities : FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerList();
 		ArrayList<String> playerNames = new ArrayList<String>();
 		for (EntityPlayer player : players) {
 			playerNames.add(player.getName());

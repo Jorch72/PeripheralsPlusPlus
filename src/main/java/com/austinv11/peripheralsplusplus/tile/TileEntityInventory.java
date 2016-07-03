@@ -5,15 +5,13 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.util.text.ITextComponent;
 
 public abstract class TileEntityInventory extends TilePeripheral implements IInventory {
 	public ItemStack[] inventory = new ItemStack[getSizeInventory()];
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbt) {
-		super.writeToNBT(nbt);
-
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		NBTTagList list = new NBTTagList();
 		for (int i = 0; i < this.getSizeInventory(); ++i) {
 			if (this.getStackInSlot(i) != null) {
@@ -24,6 +22,7 @@ public abstract class TileEntityInventory extends TilePeripheral implements IInv
 			}
 		}
 		nbt.setTag("Items", list);
+		return super.writeToNBT(nbt);
 	}
 
 
@@ -130,7 +129,7 @@ public abstract class TileEntityInventory extends TilePeripheral implements IInv
 	}
 
 	@Override
-	public IChatComponent getDisplayName() {
+	public ITextComponent getDisplayName() {
 		return null;
 	}
 

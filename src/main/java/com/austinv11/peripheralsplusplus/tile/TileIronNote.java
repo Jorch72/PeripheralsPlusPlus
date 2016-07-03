@@ -4,6 +4,10 @@ import com.austinv11.peripheralsplusplus.PeripheralsPlusPlus;
 import com.austinv11.peripheralsplusplus.network.ParticlePacket;
 import com.austinv11.peripheralsplusplus.util.CCMethod;
 import dan200.computercraft.api.lua.LuaException;
+import net.minecraft.client.audio.SoundEventAccessor;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 public class TileIronNote extends TilePeripheral {
@@ -22,11 +26,10 @@ public class TileIronNote extends TilePeripheral {
 
 		String instrument = "note." + instruments[(int) (double) (Double) arguments[0]];
 		float note = (float) Math.pow(2D, ((int) (double) (Double) arguments[1] - 12) / 12D);
-
-		getWorld().playSoundEffect(getPos().getX() + 0.5D, getPos().getY() + 0.5D, getPos().getZ() + 0.5D, instrument, 3F, note);
+		getWorld().playSound(null, getPos().getX() + 0.5D, getPos().getY() + 0.5D, getPos().getZ() + 0.5D, new SoundEvent(new ResourceLocation(instrument)), SoundCategory.RECORDS, 3F, note);
 		PeripheralsPlusPlus.NETWORK.sendToAllAround(new ParticlePacket("note", getPos().getX() + 0.5,
 						getPos().getY() + 1.2, getPos().getZ() + 0.5, note / 24D, 0, 0),
-				new NetworkRegistry.TargetPoint(getWorld().provider.getDimensionId(), getPos().getX(), getPos().getY(),
+				new NetworkRegistry.TargetPoint(getWorld().provider.getDimension(), getPos().getX(), getPos().getY(),
 						getPos().getZ(), 16));
 	}
 
@@ -45,7 +48,7 @@ public class TileIronNote extends TilePeripheral {
 		float volume = (float) (double) (Double) arguments[1];
 		float pitch = (float) (double) (Double) arguments[2];
 
-		getWorld().playSoundEffect(getPos().getX() + 0.5D, getPos().getY() + 0.5D, getPos().getZ() + 0.5D, sound, volume, pitch);
+		getWorld().playSound(null, getPos().getX() + 0.5D, getPos().getY() + 0.5D, getPos().getZ() + 0.5D, new SoundEvent(new ResourceLocation(sound)), SoundCategory.RECORDS, volume, pitch);
 	}
 
 	@Override

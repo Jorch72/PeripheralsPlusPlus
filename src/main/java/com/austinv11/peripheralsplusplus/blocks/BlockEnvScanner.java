@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 public class BlockEnvScanner extends BlockPPP implements ITileEntityProvider {
 
 	public BlockEnvScanner() {
-		super(Material.iron);
+		super(Material.IRON);
 	}
 
 	@Override

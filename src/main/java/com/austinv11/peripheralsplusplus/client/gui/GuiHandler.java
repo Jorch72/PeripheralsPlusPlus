@@ -6,7 +6,7 @@ import com.austinv11.peripheralsplusplus.tile.container.ContainerPlayerInterface
 import com.austinv11.peripheralsplusplus.tile.container.ContainerSorter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
@@ -34,7 +34,7 @@ public class GuiHandler implements IGuiHandler {
 		} else if (ID == Reference.GUIs.PLAYER_INTERFACE.ordinal()) {
 			return new GuiPlayerInterface(player, world, new BlockPos(x, y, z));
 		} else if (ID == Reference.GUIs.PERM_CARD.ordinal()) {
-			return new GuiPermCard(player.getCurrentEquippedItem());
+			return new GuiPermCard(player.getActiveItemStack());
 		}
 		return null;
 	}
